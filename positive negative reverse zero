@@ -1,0 +1,90 @@
+import java.util.Scanner;
+
+public class NumberOperations {
+
+    // 1. Check Positive, Negative, or Zero
+    public static void checkSign(int num) {
+        if (num > 0) {
+            System.out.println(num + " is Positive.");
+        } else if (num < 0) {
+            System.out.println(num + " is Negative.");
+        } else {
+            System.out.println("The number is Zero.");
+        }
+    }
+
+    // 2. Reverse a Number
+    public static int reverseNumber(int num) {
+        int reversed = 0;
+        int original = Math.abs(num); // Handle negative inputs gracefully
+        while (original != 0) {
+            int digit = original % 10;
+            reversed = reversed * 10 + digit;
+            original /= 10;
+        }
+        return (num < 0) ? -reversed : reversed;
+    }
+
+    // 3. Check Palindrome
+    public static boolean isPalindrome(int num) {
+        if (num < 0) return false; // Negative numbers are generally not palindromes
+        return num == reverseNumber(num);
+    }
+
+    // 4. Calculate Factorial
+    public static long calculateFactorial(int num) {
+        if (num < 0) {
+            System.out.println("Factorial is not defined for negative numbers.");
+            return -1;
+        }
+        long factorial = 1;
+        for (int i = 1; i <= num; i++) {
+            factorial *= i;
+        }
+        return factorial;
+    }
+
+    // 5. Check Prime Number
+    public static boolean isPrime(int num) {
+        if (num <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(num); i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Main Method
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter an integer: ");
+        int number = scanner.nextInt();
+        scanner.close();
+
+        System.out.println("\n--- Results ---");
+        checkSign(number);
+
+        int rev = reverseNumber(number);
+        System.out.println("Reversed Number: " + rev);
+
+        if (isPalindrome(number)) {
+            System.out.println(number + " is a Palindrome.");
+        } else {
+            System.out.println(number + " is not a Palindrome.");
+        }
+
+        long fact = calculateFactorial(number);
+        if (fact != -1) {
+            System.out.println("Factorial: " + fact);
+        }
+
+        if (isPrime(number)) {
+            System.out.println(number + " is a Prime Number.");
+        } else {
+            System.out.println(number + " is not a Prime Number.");
+        }
+    }
+}
